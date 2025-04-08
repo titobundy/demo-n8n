@@ -1,0 +1,124 @@
+<prompt>
+  <context>
+    <description>FDP Belleza es un centro de belleza en Sevilla con más de 20 años de experiencia en peluquería y estética.</description>
+    <location>Sevilla, España</location>
+    <mission>Ofrecer una experiencia de belleza única con tratamientos personalizados y productos de alta calidad.</mission>
+  </context>
+
+  <services>
+    <category name="Peluquería y Estilismo">
+      <service>
+        <name>Corte de puntas</name>
+        <price>16€</price>
+      </service>
+      <service>
+        <name>Corte rejuvenecedor + asesoría de imagen</name>
+        <price>22€</price>
+      </service>
+      <service>
+        <name>Brushing (alisado con secador)</name>
+        <price>18€ (corto) | 21€ (largo)</price>
+      </service>
+      <service>
+        <name>Peinado para eventos</name>
+        <price>36€ - 52€</price>
+      </service>
+    </category>
+
+    <category name="Coloración y Mechas">
+      <service>
+        <name>Tinte completo</name>
+        <price>30€</price>
+      </service>
+      <service>
+        <name>Baño de color</name>
+        <price>22€</price>
+      </service>
+      <service>
+        <name>Mechas balayage</name>
+        <price>75€</price>
+      </service>
+      <service>
+        <name>Reflejos</name>
+        <price>48€</price>
+      </service>
+    </category>
+
+    <category name="Tratamientos Capilares">
+      <service>
+        <name>Hidratación profunda con keratina</name>
+        <price>80€ - 200€</price>
+      </service>
+      <service>
+        <name>Shock de nutrición capilar</name>
+        <price>25€</price>
+      </service>
+    </category>
+
+    <category name="Cuidado de Pestañas y Cejas">
+      <service>
+        <name>Tinte de cejas</name>
+        <price>10€</price>
+      </service>
+      <service>
+        <name>Lifting y tinte de pestañas</name>
+        <price>45€</price>
+      </service>
+      <service>
+        <name>Extensiones de pestañas</name>
+        <price>70€</price>
+      </service>
+    </category>
+
+    <category name="Maquillaje Profesional">
+      <service>
+        <name>Maquillaje de día</name>
+        <price>48€</price>
+      </service>
+      <service>
+        <name>Maquillaje para eventos</name>
+        <price>60€</price>
+      </service>
+    </category>
+
+    <category name="Estética Facial">
+      <service>
+        <name>Limpieza facial profunda</name>
+        <price>35€</price>
+      </service>
+      <service>
+        <name>Tratamiento antiacné</name>
+        <price>40€</price>
+      </service>
+      <service>
+        <name>Tratamiento antiarrugas</name>
+        <price>50€</price>
+      </service>
+    </category>
+
+    <category name="Depilación y Tratamientos Corporales">
+      <service>
+        <name>Depilación con cera (piernas completas)</name>
+        <price>25€</price>
+      </service>
+      <service>
+        <name>Depilación facial</name>
+        <price>10€</price>
+      </service>
+      <service>
+        <name>Exfoliación corporal</name>
+        <price>30€</price>
+      </service>
+      <service>
+        <name>Tratamiento reafirmante</name>
+        <price>45€</price>
+      </service>
+    </category>
+  </services>
+
+  <contact>
+    <phone>+34 600 123 456</phone>
+    <email>info@fdpbelleza.es</email>
+    <website>https://www.fdpbelleza.es</website>
+  </contact>
+</prompt>

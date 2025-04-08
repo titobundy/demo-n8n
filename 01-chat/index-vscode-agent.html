@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-6">
+        <header class="bg-gray-900 text-white shadow-md">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-3xl font-serif font-bold text-pink-400">FDP Centro de Belleza</div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#" class="text-gray-300 hover:text-pink-400 transition">Inicio</a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 transition">Servicios</a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 transition">Galería</a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 transition">Sobre Nosotros</a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 transition">Contacto</a>
+                    </nav>
+                    <div class="md:hidden">
+                        <button class="text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative bg-cover bg-center h-[50vh]" style="background-image: url('https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg');">
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent"></div>
+            <div class="relative container mx-auto px-6 h-full flex items-center">
+                <div class="text-white max-w-xl">
+                    <h1 class="text-5xl md:text-6xl font-serif font-light mb-4">Belleza y Bienestar</h1>
+                    <p class="text-2xl mb-8">Experimenta un momento de tranquilidad y renovación en nuestro exclusivo centro de belleza</p>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full shadow-lg transition">Reservar Cita</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-serif text-center mb-12 text-gray-800">Nuestros Servicios</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tratamientos Faciales" class="w-full h-60 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-serif mb-2 text-gray-800">Tratamientos Faciales</h3>
+                        <p class="text-gray-600 mb-4">Revitaliza tu piel con nuestros tratamientos faciales personalizados.</p>
+                        <a href="#" class="text-pink-500 hover:text-pink-600 font-medium">Saber más →</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://images.unsplash.com/photo-1610555356070-d0efb6505f81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Manicura & Pedicura" class="w-full h-60 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-serif mb-2 text-gray-800">Manicura & Pedicura</h3>
+                        <p class="text-gray-600 mb-4">Cuidado experto para tus manos y pies con productos premium.</p>
+                        <a href="#" class="text-pink-500 hover:text-pink-600 font-medium">Saber más →</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Estilismo de Cabello" class="w-full h-60 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-serif mb-2 text-gray-800">Estilismo de Cabello</h3>
+                        <p class="text-gray-600 mb-4">Desde cortes modernos hasta tratamientos capilares rejuvenecedores.</p>
+                        <a href="#" class="text-pink-500 hover:text-pink-600 font-medium">Saber más →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 text-gray-600">
+            <p>&copy; 2025 FDP Centro de Belleza. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'http://localhost:5678/webhook/706dd0f1-4700-4bac-bb4f-3616d8dee11b/chat',
+            webhookConfig: {
+                method: 'POST',
+                headers: {},
+            },
+            target: '#n8n-chat',
+            mode: 'window',
+            chatInputKey: 'chatInput',
+            chatSessionKey: 'sessionId',
+            metadata: {},
+            showWelcomeScreen: false,
+            defaultLanguage: 'es',
+            initialMessages: [],
+            i18n: {
+                es: {
+                    title: 'Hola👋',
+                    subtitle: "Bienvenido a FDP Centro de Belleza",
+                    footer: '',
+                    getStarted: 'New Conversation',
+                    inputPlaceholder: 'mensaje...'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
