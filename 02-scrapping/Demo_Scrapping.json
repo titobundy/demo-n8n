@@ -1,0 +1,291 @@
+{
+  "name": "Demo Scrapping",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8d292043-833a-4524-a904-ab509d2c6046",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://caysend.com/torre-del-tajo/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "0e287d24-7da4-4098-9b03-a675bfe57528",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "nombre_ruta",
+              "cssSelector": "h1.elementor-heading-title"
+            },
+            {
+              "key": "datos",
+              "cssSelector": "div[data-id=\"5769e83\"]"
+            },
+            {
+              "key": "descripcion",
+              "cssSelector": "section[data-id=\"09d3938\"]"
+            },
+            {
+              "key": "carrusel",
+              "cssSelector": "div[id=\"gallery-1\"] img",
+              "returnValue": "attribute",
+              "attribute": "src",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        660,
+        0
+      ],
+      "id": "66638c1f-7dc0-4bdf-98ad-bf3b9613b0a5",
+      "name": "HTML"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "fd2842e0-c541-4a7a-8290-11de9a5873f4",
+      "name": "Wait",
+      "webhookId": "8d2f0587-4c17-460e-bf39-7ca95c55fa07"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "demo-n8n-wsp",
+        "remoteJid": "countrycode_number",
+        "messageText": "=Nombre de la ruta: {{ String.fromCharCode(10) }}{{ $json.nombre_ruta }}{{ String.fromCharCode(10) + String.fromCharCode(10) }}{{ $json.datos }}{{ String.fromCharCode(10) +  String.fromCharCode(10) }}{{ $json.descripcion }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        880,
+        0
+      ],
+      "id": "609a0426-eb3c-4c4a-ad99-a887753b93ba",
+      "name": "Evolution API",
+      "credentials": {
+        "evolutionApi": {
+          "id": "TIfmtjg1U3kP4sr2",
+          "name": "Evolution account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c14c46ef-760b-44d9-9380-d6588377d2f6",
+              "name": "carrusel",
+              "value": "={{ $('HTML').item.json.carrusel }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1100,
+        0
+      ],
+      "id": "72d4cfc9-a6ad-4e31-b3c2-d40bc5a388e6",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "carrusel",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        0
+      ],
+      "id": "41cc6826-4dc7-48b3-ad83-47a781a3babd",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1540,
+        0
+      ],
+      "id": "cca368d4-b656-4108-80c5-04eed8844e7b",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "operation": "send-image",
+        "instanceName": "demo-n8n-wsp",
+        "remoteJid": "countrycode_number",
+        "media": "={{ $('Split Out').item.json.carrusel }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        120
+      ],
+      "id": "f02f572d-22b9-49df-b65e-3b17cd4eba6d",
+      "name": "Evolution API1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "TIfmtjg1U3kP4sr2",
+          "name": "Evolution account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Evolution API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evolution API": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Evolution API1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evolution API1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a277e515-f7ff-4aeb-8d64-918df3839f29",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c65cb544ba5fb18d2d4891cdf26c2c1ed8a60120a6ca3ec3a7daaf1c8e969d43"
+  },
+  "id": "R0VVgiUQxP37Xriu",
+  "tags": []
+}

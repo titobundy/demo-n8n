@@ -1,0 +1,120 @@
+{
+  "name": "Demo Custom Chat",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ],
+      "id": "aefe7ba1-c2ac-48e4-84e6-a2d07f6e41d0",
+      "name": "When chat message received",
+      "webhookId": "706dd0f1-4700-4bac-bb4f-3616d8dee11b"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "<prompt>\n  <context>\n    <description>FDP Belleza es un centro de belleza en Sevilla con más de 20 años de experiencia en peluquería y estética.</description>\n    <location>Sevilla, España</location>\n    <mission>Ofrecer una experiencia de belleza única con tratamientos personalizados y productos de alta calidad.</mission>\n  </context>\n\n  <services>\n    <category name=\"Peluquería y Estilismo\">\n      <service>\n        <name>Corte de puntas</name>\n        <price>16€</price>\n      </service>\n      <service>\n        <name>Corte rejuvenecedor + asesoría de imagen</name>\n        <price>22€</price>\n      </service>\n      <service>\n        <name>Brushing (alisado con secador)</name>\n        <price>18€ (corto) | 21€ (largo)</price>\n      </service>\n      <service>\n        <name>Peinado para eventos</name>\n        <price>36€ - 52€</price>\n      </service>\n    </category>\n\n    <category name=\"Coloración y Mechas\">\n      <service>\n        <name>Tinte completo</name>\n        <price>30€</price>\n      </service>\n      <service>\n        <name>Baño de color</name>\n        <price>22€</price>\n      </service>\n      <service>\n        <name>Mechas balayage</name>\n        <price>75€</price>\n      </service>\n      <service>\n        <name>Reflejos</name>\n        <price>48€</price>\n      </service>\n    </category>\n\n    <category name=\"Tratamientos Capilares\">\n      <service>\n        <name>Hidratación profunda con keratina</name>\n        <price>80€ - 200€</price>\n      </service>\n      <service>\n        <name>Shock de nutrición capilar</name>\n        <price>25€</price>\n      </service>\n    </category>\n\n    <category name=\"Cuidado de Pestañas y Cejas\">\n      <service>\n        <name>Tinte de cejas</name>\n        <price>10€</price>\n      </service>\n      <service>\n        <name>Lifting y tinte de pestañas</name>\n        <price>45€</price>\n      </service>\n      <service>\n        <name>Extensiones de pestañas</name>\n        <price>70€</price>\n      </service>\n    </category>\n\n    <category name=\"Maquillaje Profesional\">\n      <service>\n        <name>Maquillaje de día</name>\n        <price>48€</price>\n      </service>\n      <service>\n        <name>Maquillaje para eventos</name>\n        <price>60€</price>\n      </service>\n    </category>\n\n    <category name=\"Estética Facial\">\n      <service>\n        <name>Limpieza facial profunda</name>\n        <price>35€</price>\n      </service>\n      <service>\n        <name>Tratamiento antiacné</name>\n        <price>40€</price>\n      </service>\n      <service>\n        <name>Tratamiento antiarrugas</name>\n        <price>50€</price>\n      </service>\n    </category>\n\n    <category name=\"Depilación y Tratamientos Corporales\">\n      <service>\n        <name>Depilación con cera (piernas completas)</name>\n        <price>25€</price>\n      </service>\n      <service>\n        <name>Depilación facial</name>\n        <price>10€</price>\n      </service>\n      <service>\n        <name>Exfoliación corporal</name>\n        <price>30€</price>\n      </service>\n      <service>\n        <name>Tratamiento reafirmante</name>\n        <price>45€</price>\n      </service>\n    </category>\n  </services>\n\n  <contact>\n    <phone>+34 600 123 456</phone>\n    <email>info@fdpbelleza.es</email>\n    <website>https://www.fdpbelleza.es</website>\n  </contact>\n</prompt>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        220,
+        0
+      ],
+      "id": "0b1669f2-010c-47bf-a662-bfc5b9d98a95",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        120,
+        260
+      ],
+      "id": "0d7ddf77-15e3-4d1b-b736-baef6200ec99",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "gS5trN8W7Ap62fVF",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        220
+      ],
+      "id": "2cd4e873-9588-42f1-b12c-349e0cbd1fc8",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3570af9b-cd91-47d2-8101-36e4c88fb0e8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b0854e7244f04e6e3ccd91a02b7a2df492f597af4e5e6a32e29edb65973067eb"
+  },
+  "id": "ggs6KZdKmEn8ZNfA",
+  "tags": []
+}
